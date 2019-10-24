@@ -2,7 +2,7 @@
 sudo dpkg --add-architecture i386
 sudo apt update
 sudo apt install -y build-essential pkgconfig
-sudo apt install -y xorg xterm mesa-utils i3
+sudo apt install -y xorg xterm mesa-utils i3 pulseaudio
 sudo apt install -y libgl1-mesa-dri:i386 libgl1-mesa-glx:i386 libglvnd-dev
 
 wget https://s3.amazonaws.com/nvidia-gaming/NVIDIA-Linux-x86_64-435.22-grid.run
