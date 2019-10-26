@@ -18,7 +18,7 @@ run_bg start-pulseaudio-x11
 run_bg x0vncserver -SecurityTypes None -rfbport 5900 -hostsfile ~/.vnc_hosts -geometry $RESOLUTION+0+0
 sleep 1
 
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DEVICE}
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | sudo fdisk ${DEVICE}
   n # new partition
   p # primary partition
   1 # partition number 1
@@ -27,6 +27,8 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DEVICE}
   w # write the partition table
   q # and we're done
 EOF
+sleep 5
 sudo mkfs.ext4 ${DEVICE}p1
 sudo mount ${DEVICE}p1 /mnt
 sudo chown ubuntu:ubuntu -R /mnt
+sudo chmod 666 /dev/uinput

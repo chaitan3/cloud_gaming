@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo dpkg --add-architecture i386
 sudo apt update
-sudo apt install -y build-essential pkgconfig
+sudo apt install -y build-essential pkg-config
 sudo apt install -y xorg xterm mesa-utils i3 pulseaudio
 sudo apt install -y libgl1-mesa-dri:i386 libgl1-mesa-glx:i386 libglvnd-dev
 
@@ -39,9 +39,8 @@ EOF
 
 nvidia-smi
 
-wget -O steam.deb https://steamcdn-a.akamaihd.net/client/installer/steam.deb
-sudo dpkg -i steam.deb
-sudo apt install -f -y
+sudo apt install -y steam steam-devices
+sudo usermod -a -G input ubuntu
 
 mkdir -p ~/.config/i3
 cp /etc/i3/config ~/.config/i3/config
