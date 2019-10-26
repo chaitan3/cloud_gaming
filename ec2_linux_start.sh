@@ -16,9 +16,10 @@ export DISPLAY=:0
 xrandr --output DVI-D-0 --mode $RESOLUTION
 sleep 1
 run_bg i3
-run_bg xterm 
 run_bg start-pulseaudio-x11
+run_bg xterm 
 run_bg x0vncserver -SecurityTypes None -rfbport 5900 -hostsfile ~/.vnc_hosts -geometry $RESOLUTION+0+0
+run_bg steam
 sleep 1
 
 sudo chmod 666 /dev/uinput
