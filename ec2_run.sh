@@ -1,5 +1,8 @@
 #!/bin/bash
+set -e
+
 DIR="$(dirname $0)"
 
-#ssh ec2 "bash -s" < $DIR/ec2_linux_install.sh
+#$DIR/ec2_launch.sh
+#sleep 30
 ssh ec2 "bash -s" < $DIR/ec2_linux_start.sh
