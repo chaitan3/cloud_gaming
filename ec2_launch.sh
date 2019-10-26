@@ -3,7 +3,13 @@ set -e
 
 source $(dirname $0)/config
 
-aws ec2 run-instances --image-id ${EC2_AMI} --instance-type ${EC2_INSTANCE_TYPE} --key-name ${KEY_NAME} --count 1 --security-group-ids ${EC2_SECURITY_GROUP}
+aws ec2 run-instances \
+    --image-id ${EC2_AMI} \
+    --instance-type ${EC2_INSTANCE_TYPE} \
+    --key-name ${KEY_NAME} \
+    --security-group-ids ${EC2_SECURITY_GROUP} \
+    --instance-initiated-shutdown-behavior terminate \
+    --count 1 
 sleep 2
 
 EC2_IP=$(aws ec2 describe-instances | \
