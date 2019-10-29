@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 
-RESOLUTION=1920x1080
-DEVICE=/dev/nvme0n1
+RESOLUTION=1920x1080 
 
 run_bg () {
     nohup $* > /dev/null < /dev/null 2>&1 &
@@ -23,6 +22,9 @@ run_bg steam
 sleep 1
 
 sudo chmod 666 /dev/uinput
+
+DEVICE=$(sudo fdisk -l|grep -E 'Disk.*nvme' | awk '{print $3 " " $2}'|sort -rh |head -n 1|cut -d' ' -f2)
+DEVICE=${DEVICE::-1}
 
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | sudo fdisk ${DEVICE}
   n # new partition

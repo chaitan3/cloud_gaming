@@ -9,3 +9,6 @@ EC2_INSTANCE_TYPE=g4dn.xlarge
 EC2_KEY_NAME=your_key_name
 
 EC2_SECURITY_GROUP=your_security_group
+
+EC2_MAX_PRICE=0.1715
+
