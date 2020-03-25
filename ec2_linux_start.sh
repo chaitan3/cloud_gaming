@@ -23,10 +23,12 @@ sleep 1
 
 sudo chmod 666 /dev/uinput
 
-DEVICE=$(sudo fdisk -l|grep -E 'Disk.*nvme' | awk '{print $3 " " $2}'|sort -rh |head -n 1|cut -d' ' -f2)
+DEVICE=$(sudo fdisk -l|grep -E 'Disk.*nvme' | awk '{print $3 " " $2}'|sort -rh |head -n 2|tail -n 1|cut -d' ' -f2)
 DEVICE=${DEVICE::-1}
 
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | sudo fdisk ${DEVICE}
+if [ ! -e ${DEVICE}p1 ]; then
+    echo 'first time boot'
+    sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | sudo fdisk ${DEVICE}
   n # new partition
   p # primary partition
   1 # partition number 1
@@ -35,7 +37,12 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | sudo fdisk ${DEVICE}
   w # write the partition table
   q # and we're done
 EOF
-sleep 5
-sudo mkfs.ext4 ${DEVICE}p1
-sudo mount ${DEVICE}p1 /mnt
-sudo chown ubuntu:ubuntu -R /mnt
+    sleep 5
+    sudo mkfs.ext4 ${DEVICE}p1
+    sudo mount ${DEVICE}p1 /mnt
+    sudo chown ubuntu:ubuntu -R /mnt
+    mkdir /mnt/steam
+else
+    echo 'second or more time boot'
+    sudo mount ${DEVICE}p1 /mnt
+fi
