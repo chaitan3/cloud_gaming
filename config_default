@@ -1,15 +1,10 @@
-EC2_KEYFILE=~/.ssh/ec2.pem
+EC2_INSTANCE_TYPE=g4dn.xlarge
+EC2_AMI=ami-04b9e92b5572fa0d1
+EC2_MAX_PRICE=0.1715
 
 EC2_CONFIG=~/.ssh/config.d/ec2_config
-
-EC2_AMI=ami-04b9e92b5572fa0d1
-
-EC2_INSTANCE_TYPE=g4dn.xlarge
-
+EC2_KEYFILE=~/.ssh/ec2.pem
 EC2_KEY_NAME=your_key_name
 
 EC2_SECURITY_GROUP=your_security_group
-
-EC2_MAX_PRICE=0.1715
-
-EC2_VOLUME=your_volume_name
+EC2_VOLUME=
